@@ -1,0 +1,51 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0vw;
+  "
+>
+  <div
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 70%;
+    "
+  >
+    <h3 style="margin: 5vh 0vw">Listes Des Produits</h3>
+    <div class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Filter"
+        aria-label="Filter"
+        [(ngModel)]="filter"
+      />
+    </div>
+  </div>
+  <table class="table" style="width: 70%; text-align: center">
+    <!-- // *ngIf="filterProduct ; else vide" -->
+    <thead>
+      <tr>
+        <th scope="col">image</th>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">price</th>
+        <th scope="col">quantity</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of filterProduct">
+      <tr>
+        <td><img [src]="product.image" width="100px" /></td>
+        <th scope="row">{{ product.id }}</th>
+        <td><a routerLink="/product/{{product.id}}">{{ product.name | uppercase }}</a></td>
+        <td>{{ product.price | number: ".2-2" }}</td>
+        <td>{{ product.quantity }}</td>
+      </tr>
+    </tbody>
+    <!-- <ng-template #vide>no products</ng-template> -->
+  </table>
+</div>
