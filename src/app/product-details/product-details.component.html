@@ -1,1 +1,4 @@
-<p>product-details works!</p>
+<h2>product: {{product.name}}</h2>
+<p *ngIf="product.quantity != 0 ; else unavailable">available</p>
+<ng-template #unavailable>no stock</ng-template>
+<button (click)="back()">retour</button>

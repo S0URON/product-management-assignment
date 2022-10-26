@@ -38,10 +38,14 @@
       </tr>
     </thead>
     <tbody *ngFor="let product of filterProduct">
-      <tr>
+      <tr [ngStyle]="{ color: getColor(product.quantity) }">
         <td><img [src]="product.image" width="100px" /></td>
         <th scope="row">{{ product.id }}</th>
-        <td><a routerLink="/product/{{product.id}}">{{ product.name | uppercase }}</a></td>
+        <td>
+          <a [routerLink]="['/product', product.id]">{{
+            product.name | uppercase
+          }}</a>
+        </td>
         <td>{{ product.price | number: ".2-2" }}</td>
         <td>{{ product.quantity }}</td>
       </tr>

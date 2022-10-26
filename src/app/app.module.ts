@@ -7,6 +7,7 @@ import { ListeProduitComponent } from './liste-produit/liste-produit.component';
 import { AjouterProduitComponent } from './ajouter-produit/ajouter-produit.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

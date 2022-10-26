@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../modele/produit';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-liste-produit',
@@ -9,38 +10,24 @@ import { Product } from '../modele/produit';
 export class ListeProduitComponent implements OnInit {
   productList: Product[] = [];
   filterProduct: Product[] = [];
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productList.push(
-      ...[
-        {
-          id: 0,
-          name: 'asus',
-          price: 400,
-          quantity: 5,
-          image: "./assets/image/dell.jpg"
-        },
-        {
-          id: 1,
-          name: 'dell',
-          price: 500,
-          quantity: 10,
-          image: "./assets/image/dell.jpg"
-        },
-        {
-          id: 2,
-          name: 'lenovo',
-          price: 450,
-          quantity: 15,
-          image: "./assets/image/dell.jpg"
-        },
-      ]
-    );
-    this.filterProduct = [...this.productList]
+    this.productService.getListProduct().then((data) => {
+      data.subscribe((pl) => {
+        this.productList.push(...pl);
+        this.filterProduct = [...this.productList];
+      });
+    });
   }
 
-  set filter(filterString:string) {    
-    this.filterProduct = this.productList.filter(p => p.name.includes(filterString))
+  set filter(filterString: string) {
+    this.filterProduct = this.productList.filter((p) =>
+      p.name.includes(filterString)
+    );
+  }
+
+  getColor(n: number) {
+    return n != 0 ? 'black' : 'red';
   }
 }
