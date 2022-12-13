@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../modele/produit';
 import { ProductService } from '../service/product.service';
 
@@ -10,14 +11,14 @@ import { ProductService } from '../service/product.service';
 export class ListeProduitComponent implements OnInit {
   productList: Product[] = [];
   filterProduct: Product[] = [];
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private route: Router) {}
 
   ngOnInit(): void {
-    this.productService.getListProduct().then((data) => {
-      data.subscribe((pl) => {
-        this.productList.push(...pl);
-        this.filterProduct = [...this.productList];
-      });
+    if (!localStorage.getItem('id')) this.route.navigate(['/login']);
+
+    this.productService.getListProduct().subscribe((data) => {
+      this.productList = [...data];
+      this.filterProduct = [...this.productList];
     });
   }
 
@@ -29,5 +30,14 @@ export class ListeProduitComponent implements OnInit {
 
   getColor(n: number) {
     return n != 0 ? 'black' : 'red';
+  }
+
+  deleteProduct(id: number) {
+    this.productService.deleteProductById(id).subscribe((_) => {
+      this.productService.getListProduct().subscribe((data) => {
+        this.productList = [...data];
+        this.filterProduct = [...this.productList];
+      });
+    });
   }
 }

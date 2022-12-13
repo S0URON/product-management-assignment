@@ -1,4 +1,53 @@
-<h2>product: {{product.name}}</h2>
-<p *ngIf="product.quantity != 0 ; else unavailable">available</p>
-<ng-template #unavailable>no stock</ng-template>
-<button (click)="back()">retour</button>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0vw;
+  "
+>
+  <form
+    style="width: 40%"
+    [formGroup]="productForm"
+    (ngSubmit)="editProduct()"
+  >
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="name"
+        required
+        formControlName="name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="price"
+        required
+        formControlName="price"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="quantity"
+        required
+        formControlName="quantity"
+      />
+    </div>
+    <input type="submit" class="btn btn-primary" value="mettre a jour" />
+  </form>
+  <button type="button" class="btn btn-secondary" (click)="back()">retour</button>
+</div>
+<app-footer></app-footer>

@@ -1,1 +1,54 @@
-<p>ajouter-produit works!</p>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0vw;
+  "
+>
+  <form style="width: 40%" #F="ngForm" (ngSubmit)="addProduct(F)">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="name"
+        ngModel
+        required
+        #name="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">this input is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputPassword1"
+        ngModel
+        name="price"
+        required
+        #price="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="price.errors?.required && price.touched">this input is required</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputPassword1"
+        ngModel
+        name="quantity"
+        #quantity="ngModel"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="quantity.errors?.required && quantity.touched">this input is required</div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="ajouter"/>
+  </form>
+</div>
+<app-footer></app-footer>
